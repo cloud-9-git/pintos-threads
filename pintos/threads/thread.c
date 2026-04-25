@@ -28,6 +28,9 @@
    that are ready to run but not actually running. */
 static struct list ready_list;
 
+/* Sleeping List */
+static struct list sleep_list;
+
 /* Idle thread. */
 static struct thread *idle_thread;
 
@@ -108,6 +111,7 @@ thread_init (void) {
 	/* Init the globla thread context */
 	lock_init (&tid_lock);
 	list_init (&ready_list);
+	list_init (&sleep_list);
 	list_init (&destruction_req);
 
 	/* Set up a thread structure for the running thread. */
@@ -210,6 +214,21 @@ thread_create (const char *name, int priority,
 	return tid;
 }
 
+void
+thread_sleep (int64_t wakeup_tick) {
+	enum intr_level old_level;
+	old_level = intr_disable ();
+
+	struct thread *curr = thread_current();
+	curr->wakeup_tick = wakeup_tick;
+
+	if (curr != idle_thread)
+		list_push_back (&sleep_list, &curr->elem);
+
+	thread_block();
+	intr_set_level (old_level);
+}
+
 /* Puts the current thread to sleep.  It will not be scheduled
    again until awoken by thread_unblock().
 
@@ -223,6 +242,28 @@ thread_block (void) {
 	thread_current ()->status = THREAD_BLOCKED;
 	schedule ();
 }
+
+void
+thread_awake (int64_t current_tick){
+	/*sleep_list를 처음부터 끝까지 순회할 방법이 있나*/
+	struct list_elem *e = list_begin(&sleep_list);
+	while (e != list_end(&sleep_list)) {
+		struct thread *t = list_entry(e, struct thread, elem);
+		struct list_elem *next = list_next(e);
+		/*만약 sleep_list의 원소가 들어있는 스레드의 wakeup_tick이 current_tick보다 작거나 같으면*/
+		/*해당 원소를 sleep_list에서 꺼내고, 해당 원소가 들어있는 스레드를 thread_unblock()한다*/
+		if (t->wakeup_tick <= current_tick) {
+			list_remove(e);
+			thread_unblock(t);
+		}
+		e = next;
+	}
+}
+/*
+인터럽트 핸들러에서 매 tick마다 sleep_list 전체를 끝까지 도는 구조라, 스레드가 늘면 timer_interrupt()가 무거워질 수 있어요.
+thread.c (line 247), timer.c (line 129)
+지금 구현은 동작 방향은 맞지만, 리스트가 정렬돼 있지 않아서 매 tick 전체 순회를 강제합니다. 작은 테스트는 버틸 수 있어도, 인터럽트 핸들러는 가능한 짧게 끝내는 쪽이 안전해요. 정렬된 sleep_list를 유지하면 앞부분만 보고 멈출 수 있어서 더 낫습니다.
+*/
 
 /* Transitions a blocked thread T to the ready-to-run state.
    This is an error if T is not blocked.  (Use thread_yield() to
