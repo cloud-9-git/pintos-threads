@@ -4,6 +4,7 @@
 #include <random.h>
 #include <stdio.h>
 #include <string.h>
+#include "list.h"
 #include "threads/flags.h"
 #include "threads/interrupt.h"
 #include "threads/intr-stubs.h"
@@ -27,6 +28,9 @@
 /* List of processes in THREAD_READY state, that is, processes
    that are ready to run but not actually running. */
 static struct list ready_list;
+
+/* 자고 있는 스레드들의 리스트 */
+static struct list sleep_list;
 
 /* Idle thread. */
 static struct thread *idle_thread;
@@ -60,7 +64,9 @@ static void idle (void *aux UNUSED);
 static struct thread *next_thread_to_run (void);
 static void init_thread (struct thread *, const char *name, int priority);
 static void do_schedule(int status);
+static bool wake_up_less (const struct list_elem *, const struct list_elem *, void *aux);
 static void schedule (void);
+
 static tid_t allocate_tid (void);
 
 /* Returns true if T appears to point to a valid thread. */
@@ -108,6 +114,7 @@ thread_init (void) {
 	/* Init the globla thread context */
 	lock_init (&tid_lock);
 	list_init (&ready_list);
+	list_init (&sleep_list);
 	list_init (&destruction_req);
 
 	/* Set up a thread structure for the running thread. */
@@ -210,6 +217,34 @@ thread_create (const char *name, int priority,
 	return tid;
 }
 
+/* wakeup_tick이 된 스레드들 깨우기 */
+void thread_awake(int64_t now) {
+	while  (!(list_empty(&sleep_list))) {
+	struct list_elem *head = list_begin(&sleep_list);
+	struct thread *t = list_entry(head, struct thread, elem);
+	if (t->wakeup_tick > now) 
+		break;
+	 
+	list_pop_front(&sleep_list);
+	thread_unblock(t);
+	}
+}
+
+/* running thread를 sleep list에 추가하고 block */
+void thread_sleep(int64_t wakeup_tick) {
+	struct thread *curr = thread_current();
+	enum intr_level old_level;
+
+	old_level = intr_disable();
+	curr->wakeup_tick = wakeup_tick;
+	list_insert_ordered(&sleep_list, &curr->elem, wake_up_less, NULL);
+
+	thread_block();
+
+	intr_set_level(old_level);
+}
+
+
 /* Puts the current thread to sleep.  It will not be scheduled
    again until awoken by thread_unblock().
 
@@ -222,6 +257,16 @@ thread_block (void) {
 	ASSERT (intr_get_level () == INTR_OFF);
 	thread_current ()->status = THREAD_BLOCKED;
 	schedule ();
+}
+
+/* ta가 tb보다 앞에 오려면: wakeup_tick이 더 이르거나, 같으면 priority가 더 높음
+   (같은 tick에 깨는 스레드는 높은 우선순위를 먼저 pop → alarm-priority 통과). */
+static bool wake_up_less (const struct list_elem *a, const struct list_elem *b, void *aux UNUSED) {
+	struct thread *ta = list_entry(a, struct thread, elem);
+	struct thread *tb = list_entry(b, struct thread, elem);
+
+	if (ta->wakeup_tick != tb->wakeup_tick)
+		return ta->wakeup_tick < tb->wakeup_tick;
 }
 
 /* Transitions a blocked thread T to the ready-to-run state.

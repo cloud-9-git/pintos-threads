@@ -1,0 +1,247 @@
+[
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/init.c -o threads/init.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/init.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/init.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/thread.c -o threads/thread.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/thread.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/thread.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/interrupt.c -o threads/interrupt.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/interrupt.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/interrupt.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/synch.c -o threads/synch.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/synch.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/synch.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/palloc.c -o threads/palloc.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/palloc.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/palloc.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/malloc.c -o threads/malloc.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/malloc.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/malloc.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../threads/mmu.c -o threads/mmu.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/mmu.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/threads/mmu.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/timer.c -o devices/timer.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/timer.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/timer.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/kbd.c -o devices/kbd.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/kbd.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/kbd.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/vga.c -o devices/vga.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/vga.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/vga.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/serial.c -o devices/serial.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/serial.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/serial.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/disk.c -o devices/disk.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/disk.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/disk.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/input.c -o devices/input.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/input.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/input.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../devices/intq.c -o devices/intq.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/intq.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/devices/intq.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/debug.c -o lib/debug.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/debug.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/debug.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/random.c -o lib/random.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/random.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/random.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/stdio.c -o lib/stdio.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/stdio.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/stdio.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/stdlib.c -o lib/stdlib.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/stdlib.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/stdlib.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/string.c -o lib/string.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/string.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/string.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/arithmetic.c -o lib/arithmetic.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/arithmetic.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/arithmetic.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/kernel/debug.c -o lib/kernel/debug.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/kernel/debug.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/kernel/debug.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/kernel/list.c -o lib/kernel/list.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/kernel/list.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/kernel/list.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/kernel/bitmap.c -o lib/kernel/bitmap.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/kernel/bitmap.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/kernel/bitmap.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/kernel/hash.c -o lib/kernel/hash.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/kernel/hash.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/kernel/hash.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../lib/kernel/console.c -o lib/kernel/console.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF lib/kernel/console.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/lib/kernel/console.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/tests.c -o tests/threads/tests.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/tests.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/tests.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/alarm-wait.c -o tests/threads/alarm-wait.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-wait.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/alarm-wait.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/alarm-simultaneous.c -o tests/threads/alarm-simultaneous.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-simultaneous.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/alarm-simultaneous.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/alarm-priority.c -o tests/threads/alarm-priority.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-priority.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/alarm-priority.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/alarm-zero.c -o tests/threads/alarm-zero.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-zero.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/alarm-zero.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/alarm-negative.c -o tests/threads/alarm-negative.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-negative.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/alarm-negative.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-change.c -o tests/threads/priority-change.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-change.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-change.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-one.c -o tests/threads/priority-donate-one.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-one.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-one.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-multiple.c -o tests/threads/priority-donate-multiple.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-multiple.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-multiple.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-multiple2.c -o tests/threads/priority-donate-multiple2.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-multiple2.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-multiple2.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-nest.c -o tests/threads/priority-donate-nest.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-nest.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-nest.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-sema.c -o tests/threads/priority-donate-sema.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-sema.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-sema.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-lower.c -o tests/threads/priority-donate-lower.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-lower.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-lower.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-fifo.c -o tests/threads/priority-fifo.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-fifo.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-fifo.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-preempt.c -o tests/threads/priority-preempt.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-preempt.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-preempt.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-sema.c -o tests/threads/priority-sema.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-sema.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-sema.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-condvar.c -o tests/threads/priority-condvar.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-condvar.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-condvar.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/priority-donate-chain.c -o tests/threads/priority-donate-chain.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-chain.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/priority-donate-chain.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-load-1.c -o tests/threads/mlfqs/mlfqs-load-1.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-load-1.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-load-1.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-load-60.c -o tests/threads/mlfqs/mlfqs-load-60.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-load-60.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-load-60.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-load-avg.c -o tests/threads/mlfqs/mlfqs-load-avg.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-load-avg.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-load-avg.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-recent-1.c -o tests/threads/mlfqs/mlfqs-recent-1.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-recent-1.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-recent-1.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-fair.c -o tests/threads/mlfqs/mlfqs-fair.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-fair.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-fair.c"
+  },
+  {
+    "directory": "/workspaces/pintos_22.04_lab_docker/pintos/threads/build",
+    "command": "gcc -c ../../tests/threads/mlfqs/mlfqs-block.c -o tests/threads/mlfqs/mlfqs-block.o -g -msoft-float -O0 -fno-omit-frame-pointer -mno-red-zone -mcmodel=large -fno-plt -fno-pic -mno-sse -fno-stack-protector -fno-stack-clash-protection -nostdinc -I../.. -I../../include/lib -I../../include -I../../include/lib/kernel -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs/mlfqs-block.d",
+    "file": "/workspaces/pintos_22.04_lab_docker/pintos/tests/threads/mlfqs/mlfqs-block.c"
+  }
+]

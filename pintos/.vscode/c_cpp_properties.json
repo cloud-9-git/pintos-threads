@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "name": "Pintos (pintos 폴더 열었을 때)",
+      "includePath": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/include/lib",
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/include/lib/kernel",
+        "${workspaceFolder}/lib/kernel"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "compilerArgs": ["-nostdinc"],
+      "cStandard": "c11",
+      "intelliSenseMode": "linux-gcc-x64",
+      "browse": {
+        "path": ["${workspaceFolder}"],
+        "limitSymbolsToIncludedHeaders": false
+      }
+    }
+  ],
+  "version": 4
+}

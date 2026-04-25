@@ -106,6 +106,9 @@ struct list {
 
 void list_init (struct list *);
 
+void thread_sleep(int64_t wakeup_tick);
+void thread_awake(int64_t now);
+
 /* List traversal. */
 struct list_elem *list_begin (struct list *);
 struct list_elem *list_next (struct list_elem *);

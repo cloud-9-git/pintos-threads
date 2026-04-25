@@ -5,8 +5,9 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools-extension-pack",
-                "ms-vscode.cpptools",
+                "anysphere.cpptools",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "MS-CEINTL.vscode-language-pack-ko",
                 "ms-azuretools.vscode-docker",
                 "ms-vscode.makefile-tools"
             ],
@@ -14,5 +15,6 @@
                 "terminal.integrated.defaultProfile.linux": "bash"
             }
         }
-    }
+    },
+    "postCreateCommand": "bash pintos/utils/devcontainer-post-create.sh"
 }

@@ -92,6 +92,10 @@ struct thread {
 	char name[16];                      /* Name (for debugging purposes). */
 	int priority;                       /* Priority. */
 
+	/* 스레드가 깨어나야 하는 절대 tick 시각. */
+	/* Absolute tick at which the thread should wake up. */
+	int64_t wakeup_tick;
+
 	/* Shared between thread.c and synch.c. */
 	struct list_elem elem;              /* List element. */
 
@@ -123,6 +127,7 @@ void thread_print_stats (void);
 typedef void thread_func (void *aux);
 tid_t thread_create (const char *name, int priority, thread_func *, void *);
 
+void thread_sleep (int64_t);
 void thread_block (void);
 void thread_unblock (struct thread *);
 

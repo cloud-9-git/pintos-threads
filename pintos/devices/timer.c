@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <round.h>
 #include <stdio.h>
+#include "list.h"
 #include "threads/interrupt.h"
 #include "threads/io.h"
 #include "threads/synch.h"
@@ -88,14 +89,20 @@ timer_elapsed (int64_t then) {
 }
 
 /* Suspends execution for approximately TICKS timer ticks. */
+/* 스레드가 호출 - "나는 지금부터 ticks 만큼 CPU를 받지 않겠다" */
 void
-timer_sleep (int64_t ticks) {
-	int64_t start = timer_ticks ();
+timer_sleep (int64_t ticks) { // sleep during ticks
+	int64_t start;
 
 	ASSERT (intr_get_level () == INTR_ON);
-	while (timer_elapsed (start) < ticks)
-		thread_yield ();
+	// test 1, 2 alarm-zero, alarm-negative
+	if (ticks <= 0)
+		return;
+	start = timer_ticks ();
+	// sleep_list에 추가 + curr->status = THREAD_BLOCKED + schedule()(다음 실행할 스레드 고르기)
+	thread_sleep (start + ticks);
 }
+
 
 /* Suspends execution for approximately MS milliseconds. */
 void
@@ -125,7 +132,8 @@ timer_print_stats (void) {
 static void
 timer_interrupt (struct intr_frame *args UNUSED) {
 	ticks++;
-	thread_tick ();
+	thread_awake(ticks); // sleep_list에서 꺼내고 unblock()
+	thread_tick (); // 현재 실행 중인 thread가 이번 CPU 차례에서 몇 tick을 썼는지 센다 TIME_SLICE 만큼 사용했으면 itterupt가 끝난 뒤 바로 yield
 }
 
 /* Returns true if LOOPS iterations waits for more than one timer

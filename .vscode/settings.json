@@ -1,0 +1,18 @@
+{
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}/pintos"
+  ],
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/pintos/compile_commands.json",
+  "editor.hover.enabled": true,
+  "editor.hover.sticky": true,
+  "editor.parameterHints.enabled": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "files.associations": {
+    "*.h": "c"
+  }
+}

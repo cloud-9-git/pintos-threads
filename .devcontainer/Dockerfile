@@ -12,6 +12,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     locales tzdata \
     build-essential \
     gcc \
+    clangd \
     gdb \
     vim \
     git \

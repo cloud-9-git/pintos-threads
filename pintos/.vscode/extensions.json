@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "anysphere.cpptools",
+    "llvm-vs-code-extensions.vscode-clangd",
+    "MS-CEINTL.vscode-language-pack-ko"
+  ]
+}
