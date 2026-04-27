@@ -178,8 +178,7 @@ thread_print_stats (void) {
    실제 우선순위 스케줄링은 아직 구현되어 있지 않다.
    우선순위 스케줄링은 Problem 1-3의 목표다. */
 tid_t
-thread_create (const char *name, int priority,
-		thread_func *function, void *aux) {
+thread_create (const char *name, int priority,thread_func *function, void *aux) {
 	struct thread *t;
 	tid_t tid;
 
@@ -207,6 +206,10 @@ thread_create (const char *name, int priority,
 
 	/* 실행 큐에 추가한다. */
 	thread_unblock (t);
+
+	if (t->priority > thread_current()->priority) {
+		thread_yield();
+	}
 
 	return tid;
 }
@@ -278,7 +281,7 @@ thread_unblock (struct thread *t) {
 
 	old_level = intr_disable ();
 	ASSERT (t->status == THREAD_BLOCKED);
-	list_push_back (&ready_list, &t->elem);
+	list_insert_ordered(&ready_list, &t->elem, thread_priority_less, NULL);
 	t->status = THREAD_READY;
 	intr_set_level (old_level);
 }
@@ -340,7 +343,7 @@ thread_yield (void) {
 
 	old_level = intr_disable ();
 	if (curr != idle_thread)
-		list_push_back (&ready_list, &curr->elem);
+		list_insert_ordered(&ready_list, &curr->elem, thread_priority_less, NULL);
 	do_schedule (THREAD_READY);
 	intr_set_level (old_level);
 }
@@ -349,6 +352,21 @@ thread_yield (void) {
 void
 thread_set_priority (int new_priority) {
 	thread_current ()->priority = new_priority;
+
+	if (!list_empty(&ready_list)) {
+		struct thread *t = list_entry(list_front(&ready_list), struct thread, elem);
+		if (t->priority > thread_current()->priority) {
+			thread_yield();
+		}
+	}
+}
+
+/* thread priority가 더 높은 쪽을 꺼냄 */
+bool thread_priority_less(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED) {
+    struct thread *ta = list_entry(a, struct thread, elem);
+    struct thread *tb = list_entry(b, struct thread, elem);
+
+    return ta->priority > tb->priority;
 }
 
 /* 현재 스레드의 우선순위를 반환한다. */
