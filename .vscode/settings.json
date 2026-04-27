@@ -1,0 +1,24 @@
+{
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.tabCompletion": "on",
+  "editor.suggest.showFields": true,
+  "editor.suggest.showProperties": true,
+  "files.associations": {
+    "*.c": "c",
+    "*.h": "c"
+  },
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "C_Cpp.autocomplete": "Default",
+  "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+  "clangd.onConfigChanged": "restart",
+  "clangd.fallbackFlags": [
+    "-xc",
+    "-std=gnu11"
+  ]
+}

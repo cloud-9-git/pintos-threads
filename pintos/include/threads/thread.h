@@ -123,7 +123,8 @@ void thread_print_stats (void);
 typedef void thread_func (void *aux);
 tid_t thread_create (const char *name, int priority, thread_func *, void *);
 
-void thread_sleep (int64_t);
+void thread_sleep (int64_t wakeup_tick);
+void thread_awake (int64_t current_tick);
 void thread_block (void);
 void thread_unblock (struct thread *);
 

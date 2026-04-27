@@ -65,6 +65,7 @@ static struct thread *next_thread_to_run (void);
 static void init_thread (struct thread *, const char *name, int priority);
 static void do_schedule(int status);
 static bool wake_up_less (const struct list_elem *, const struct list_elem *, void *aux);
+static bool cmp_priority (const struct list_elem *a, const struct list_elem *b, void *aux);
 static void schedule (void);
 
 static tid_t allocate_tid (void);
@@ -206,8 +207,10 @@ thread_create (const char *name, int priority,
 	t->tf.eflags = FLAG_IF;
 
 	/* 실행 큐에 추가한다. */
-	thread_unblock (t);
-
+	thread_unblock (t); 
+	if (t->priority > thread_current()->priority) {
+		thread_yield(); // ready_list는 이미 priority 순으로 정렬되어 있기 때문에 t는 ready_list의 맨 앞에 와 있고, t가 다음으로 실행
+	}
 	return tid;
 }
 
@@ -221,6 +224,7 @@ void thread_awake(int64_t now) {
 	 
 	list_pop_front(&sleep_list);
 	thread_unblock(t);
+	
 	}
 }
 
@@ -234,7 +238,6 @@ void thread_sleep(int64_t wakeup_tick) {
 	list_insert_ordered(&sleep_list, &curr->elem, wake_up_less, NULL);
 
 	thread_block();
-
 	intr_set_level(old_level);
 }
 
@@ -261,6 +264,7 @@ static bool wake_up_less (const struct list_elem *a, const struct list_elem *b, 
 
 	if (ta->wakeup_tick != tb->wakeup_tick)
 		return ta->wakeup_tick < tb->wakeup_tick;
+	return false;
 }
 
 /* 블록된 스레드 `T`를 실행 가능한 준비 상태로 바꾼다.
@@ -278,7 +282,7 @@ thread_unblock (struct thread *t) {
 
 	old_level = intr_disable ();
 	ASSERT (t->status == THREAD_BLOCKED);
-	list_push_back (&ready_list, &t->elem);
+	list_insert_ordered(&ready_list, &t->elem, cmp_priority, NULL); // priority가 높은 순으로 앞쪽으로 삽입
 	t->status = THREAD_READY;
 	intr_set_level (old_level);
 }
@@ -339,16 +343,34 @@ thread_yield (void) {
 	ASSERT (!intr_context ());
 
 	old_level = intr_disable ();
-	if (curr != idle_thread)
-		list_push_back (&ready_list, &curr->elem);
-	do_schedule (THREAD_READY);
-	intr_set_level (old_level);
+	if (curr != idle_thread) {
+		list_insert_ordered(&ready_list, &curr->elem, cmp_priority, NULL); // priority가 높은 순으로 앞쪽으로 삽입;
+		do_schedule (THREAD_READY);
+		intr_set_level (old_level);
+	}
+}
+
+/* list elem a의 priority가 b의 priority 보다 높은지 확인한다.  */
+bool cmp_priority(const struct list_elem *a, const struct list_elem *b, void *aux) {
+	struct thread *ta = list_entry(a, struct thread, elem);
+	struct thread *tb = list_entry(b, struct thread, elem);
+
+	return ta->priority > tb->priority;
 }
 
 /* 현재 스레드의 우선순위를 `NEW_PRIORITY`로 설정한다. */
 void
 thread_set_priority (int new_priority) {
 	thread_current ()->priority = new_priority;
+	
+	if (!list_empty(&ready_list)) {  // 여기부터 priority_change test
+		struct list_elem *elem = list_begin(&ready_list);
+		struct thread *head = list_entry(elem, struct thread, elem);
+		
+		if (head->priority > new_priority) { 
+		thread_yield();
+		}
+	}	
 }
 
 /* 현재 스레드의 우선순위를 반환한다. */
