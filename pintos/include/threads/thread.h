@@ -87,7 +87,11 @@ struct thread {
 	tid_t tid;                          /* 스레드 식별자. */
 	enum thread_status status;          /* 스레드 상태. */
 	char name[16];                      /* 이름(디버깅용). */
-	int priority;                       /* 우선순위. */
+	int priority;						// 현재 effective priority
+	int init_priority;					// 원래/base priority
+	struct lock *wait_on_lock;			// 현재 기다리는 lock
+	struct list donations;				// 나에게 priority를 준 donor 목록(기부자 명단)
+	struct list_elem donation_elem;		// 내가 다른 thread의 donations에 들어갈 때 사용
 
 	/* 스레드가 깨어나야 하는 절대 tick 시각. */
 	int64_t wakeup_tick;
