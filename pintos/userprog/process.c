@@ -180,9 +180,13 @@ process_exec (void *f_name) {
 	success = load (file_name, &_if);
 
 	/* If load failed, quit. */
-	palloc_free_page (file_name);
-	if (!success)
+
+	if (!success) {
+		palloc_free_page (file_name);
 		return -1;
+	}
+	
+	palloc_free_page (file_name);
 
 	/* Start switched process. */
 	do_iret (&_if);
@@ -310,6 +314,9 @@ struct ELF64_PHDR {
 #define ELF ELF64_hdr
 #define Phdr ELF64_PHDR
 
+// 유저 커맨드 인자 수 제한
+#define MAX_ARGS 64
+
 static bool setup_stack (struct intr_frame *if_);
 static bool validate_segment (const struct Phdr *, struct file *);
 static bool load_segment (struct file *file, off_t ofs, uint8_t *upage,
@@ -329,16 +336,51 @@ load (const char *file_name, struct intr_frame *if_) {
 	bool success = false;
 	int i;
 
+	// 유저 커맨드 복사본 생성
+	char *user_cmd_copy = NULL;
+	user_cmd_copy = palloc_get_page(0); 
+	if (user_cmd_copy == NULL) {
+		goto done;
+	}
+	strlcpy(user_cmd_copy, file_name, PGSIZE);
+
 	/* Allocate and activate page directory. */
 	t->pml4 = pml4_create ();
 	if (t->pml4 == NULL)
 		goto done;
 	process_activate (thread_current ());
 
+	// 커맨드의 유저 프로그램 부분 파싱 - 토크나이즈하고 인자수를 얻는다
+	char *token, *save_ptr;
+	char *argv[MAX_ARGS];
+	memset(argv, 0, sizeof argv);
+	uintptr_t arg_addr[MAX_ARGS];
+	memset(arg_addr, 0, sizeof arg_addr);
+	int argc = 0;
+
+	for (token = strtok_r (user_cmd_copy, " ", &save_ptr); 
+		token != NULL;
+    	token = strtok_r (NULL, " ", &save_ptr)) {
+			if (argc >= MAX_ARGS - 1) {
+				printf ("load: too many arguments\n");
+				goto done;
+			}
+			argv[argc] = token;
+			argc ++;
+	}
+
+	if (argc == 0) {
+		printf ("load: no argument\n");
+		goto done;
+	}
+
+	argv[argc] = NULL;
+	arg_addr[argc] = 0;
+
 	/* Open executable file. */
-	file = filesys_open (file_name);
+	file = filesys_open (argv[0]);
 	if (file == NULL) {
-		printf ("load: %s: open failed\n", file_name);
+		printf ("load: %s: open failed\n", argv[0]);
 		goto done;
 	}
 
@@ -350,7 +392,7 @@ load (const char *file_name, struct intr_frame *if_) {
 			|| ehdr.e_version != 1
 			|| ehdr.e_phentsize != sizeof (struct Phdr)
 			|| ehdr.e_phnum > 1024) {
-		printf ("load: %s: error loading executable\n", file_name);
+		printf ("load: %s: error loading executable\n", argv[0]);
 		goto done;
 	}
 
@@ -416,12 +458,65 @@ load (const char *file_name, struct intr_frame *if_) {
 
 	/* TODO: Your code goes here.
 	 * TODO: Implement argument passing (see project2/argument_passing.html). */
+	//다음 예시 명령의 인자를 어떻게 처리할지 생각해 봅시다. /bin/ls -l foo bar.
+	//명령을 단어로 나눕니다. /bin/ls, -l, foo, bar.
+	// 단어들을 스택(stack)의 맨 위에 놓습니다. 이 단어들은 포인터를 통해 참조되므로 순서는 중요하지 않습니다.
+	// 각 문자열의 주소와 널 포인터 센티널(null pointer sentinel)을 오른쪽에서 왼쪽 순서로 스택에 푸시합니다. 
+	// 이것들이 argv의 원소입니다. 널 포인터 센티널은 C 표준이 요구하는 대로 argv[argc]가 널 포인터가 되게 합니다.
+	// 이 순서는 argv[0]이 가장 낮은 가상 주소(virtual address)에 놓이도록 보장합니다.
+	// 단어 정렬(word-aligned) 접근은 정렬되지 않은 접근보다 빠르므로, 최상의 성능을 위해 첫 번째 푸시 전에 스택 포인터(stack pointer)를 8의 배수로 내림 정렬하십시오.
+	// %rsi가 argv, 즉 argv[0]의 주소를 가리키게 하고 %rdi를 argc로 설정합니다.
+	// 마지막으로 가짜 "반환 주소(return address)"를 푸시합니다. 진입 함수는 결코 반환하지 않지만, 그 스택 프레임(stack frame)은 다른 함수와 같은 구조를 가져야 합니다.
+
+	// 인자 문자열을 메모리에 푸시하고, 인자 문자열을 넣은 메모리 주소값을 임시 배열에 저장
+	for (int i = argc - 1; i >= 0; i--){
+		size_t len = strlen(argv[i]) + 1;
+		if_->rsp -= len;
+		memcpy((void *)if_->rsp, argv[i], len);
+		arg_addr[i] = if_->rsp;
+	}
+
+	// 패딩을 메모리에 푸시
+	while ((uintptr_t) if_->rsp % 8 != 0) {
+		if_->rsp -= 1;
+	*(uint8_t *) if_->rsp = 0;
+	}
+
+	// 인자의 메모리 주소값을 메모리에 푸시
+	for (int i = argc; i >= 0; i--) {
+		if_->rsp -= sizeof(uintptr_t);
+		memcpy((void *)if_->rsp, &arg_addr[i], sizeof(arg_addr[i]));
+	}
+
+	// argv 시작주소값을 메모리에 푸시
+	uintptr_t argv_start_addr = if_->rsp;
+	if_->rsp -= sizeof(uintptr_t);
+	memcpy((void *)if_->rsp, &argv_start_addr, sizeof(argv_start_addr));
+	// *(uintptr_t *) if_->rsp = argv_start_addr;
+
+	// argc 값을 메모리에 푸시
+	uintptr_t argc_value = argc;
+	if_->rsp -= sizeof(uintptr_t);
+	memcpy((void *)if_->rsp, &argc_value, sizeof(argc_value));
+
+	// 가짜 리턴 주소값을 메모리에 푸시
+	uintptr_t fake_return_addr = 0;
+	if_->rsp -= sizeof(uintptr_t);
+	memcpy((void *)if_->rsp, &fake_return_addr, sizeof(fake_return_addr));
+
+	if_->R.rdi = argc_value;
+	if_->R.rsi = argv_start_addr;
 
 	success = true;
 
 done:
 	/* We arrive here whether the load is successful or not. */
-	file_close (file);
+	if (user_cmd_copy != NULL) {
+		palloc_free_page (user_cmd_copy);
+	}
+	if (file != NULL) {
+		file_close (file);
+	}
 	return success;
 }
 
