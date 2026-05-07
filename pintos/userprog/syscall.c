@@ -120,7 +120,7 @@ find_fd_entry(int fd) {
 
 /* 메인 시스템 호출 인터페이스 */
 void
-syscall_handler (struct intr_frame *f UNUSED) {
+syscall_handler (struct intr_frame *f) {
 	// TODO: Your implementation goes here.
 
 	struct thread *t = thread_current();
@@ -170,6 +170,19 @@ syscall_handler (struct intr_frame *f UNUSED) {
 
 	}
 
+	case SYS_FILESIZE: {
+		int fd = (int) f->R.rdi;
+		struct fd_entry *entry = find_fd_entry(fd);
+		if (entry == NULL || entry->file == NULL) {
+			f->R.rax = -1;
+			break;
+		}
+		lock_acquire(&filesys_lock);
+		f->R.rax = file_length(entry->file);
+		lock_release(&filesys_lock);
+		break;
+	}
+
 	case SYS_WRITE: {
 		int fd = (int) f->R.rdi;
 		const void *buffer = (const void *) f->R.rsi;
@@ -207,7 +220,22 @@ syscall_handler (struct intr_frame *f UNUSED) {
 		f->R.rax = read((int) f->R.rdi, (void *) f->R.rsi, (unsigned) f->R.rdx);
 		break;
 	}
-	
+
+	case SYS_SEEK: {
+		int fd = (int)f->R.rdi;
+		off_t position = (off_t)f->R.rsi;
+		struct fd_entry *entry = find_fd_entry(fd);
+
+		if (entry == NULL || entry->file == NULL || position < 0) {
+			break;
+		}
+
+		lock_acquire(&filesys_lock);
+		file_seek(entry->file, position);
+		lock_release(&filesys_lock);
+		break;
+	}
+
 	case SYS_CLOSE: {
 		int fd = (int) f->R.rdi;
 		struct list_elem *e;
@@ -229,6 +257,27 @@ syscall_handler (struct intr_frame *f UNUSED) {
 	
 	case SYS_HALT: {
 		power_off();
+	}
+	
+	case SYS_FORK: {
+		const char *thread_name = (const char *) f->R.rdi;
+		char *kbuf;
+		
+		kbuf = palloc_get_page(0);
+
+		if (kbuf == NULL) {
+			f->R.rax = TID_ERROR;
+			break;
+		}
+		
+		if (!copy_in_string(kbuf, thread_name, PGSIZE))	{
+			palloc_free_page(kbuf);
+			t->exit_status = -1;
+    		thread_exit();
+		}
+
+		f->R.rax = process_fork(kbuf, f);
+		break;
 	}
 
 	case SYS_WAIT: {
@@ -253,7 +302,12 @@ syscall_handler (struct intr_frame *f UNUSED) {
     		thread_exit();
 		}
 
-		f->R.rax = process_exec(kbuf);
+		int ret = process_exec(kbuf);
+		if (ret == -1) {
+			t->exit_status = -1;
+			thread_exit();
+		}
+		f->R.rax = ret;
 		break;
 	}
 	

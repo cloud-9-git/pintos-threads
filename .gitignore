@@ -26,5 +26,8 @@ core
 *~
 *.swp
 
+# 로컬 Pintos 테스트 히스토리
+pintos/.vscode/pintos-test-history.json
+
 # macOS
 .DS_Store
